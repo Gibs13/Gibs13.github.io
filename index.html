@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Espoir</title>
+    <script src="phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+
+        var config = {
+            type: Phaser.AUTO,
+            width: 365,
+            height: 780,
+            autoCenter: true,
+            scale: {
+                // Fit to window
+                mode: Phaser.Scale.FIT,
+                // Center vertically and horizontally
+                autoCenter: Phaser.Scale.CENTER_BOTH
+            },
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        var game = new Phaser.Game(config);
+
+        function preload() {
+            console.log("Preloading assets...");
+            this.load.image('accueil', 'assets/Accueil_decor.jpg');
+            this.load.image('sallejeu', 'assets/Salle_jeux_1.jpg');
+            this.load.image('sallejeu2', 'assets/Salle_jeux_2.jpg');
+            this.load.image('couloir1', 'assets/Porte_mucite.jpg');
+            this.load.image('couloir2', 'assets/Porte_didactique.jpg');
+            this.load.image('couloir3', 'assets/Porte_carie.jpg');
+            this.load.image('couloir4', 'assets/Porte_4.jpg');
+            this.load.image('cabinet', 'assets/Chambre_mucite.jpg');
+            this.load.image('gto', 'assets/Bouche_ouverte.jpg');
+            this.load.image('gth', 'assets/Bouche_ferme.jpg');
+            this.load.image('tache1', 'assets/Mucite_1.png');
+            this.load.image('tache2', 'assets/Mucite_2.png');
+            this.load.image('tache3', 'assets/Mucite_3.png');
+            this.load.image('tache4', 'assets/Mucite_4.png');
+            this.load.image('tache5', 'assets/Mucite_5.png');
+            this.load.image('lunettes', 'assets/Chambre_mucite_ours_lunette.jpg');
+            this.load.image('lunettesGamme', 'assets/Lunettes_gamme.png');
+            this.load.image('fg', 'assets/Fleche_gauche.png');
+            this.load.image('fd', 'assets/Fleche_droite.png');
+            this.load.image('outils', 'assets/Outils_laser.png');
+            this.load.image('trop', 'assets/Trophee.png');
+            this.load.spritesheet('halolun', 'assets/Halo_lunette.png', { frameWidth: 365, frameHeight: 780, endFrame: 2 });
+            this.load.spritesheet('halolas', 'assets/Halo_laser.png', { frameWidth: 365, frameHeight: 780, endFrame: 2 });
+            this.load.spritesheet('etincelles', 'assets/etincelles.png', { frameWidth: 225, frameHeight: 480, endFrame: 2 });
+            this.load.spritesheet('lasergrand', 'assets/Outils_laser_anim_final.png', { frameWidth: 299, frameHeight: 166, endFrame: 3 });
+            this.load.spritesheet('grand', 'assets/Outils_laser_anim_final.png', { frameWidth: 299, frameHeight: 166, endFrame: 3 });
+            this.load.spritesheet('lasergrand2', 'assets/2Outils_laser_anim_final.png', { frameWidth: 271, frameHeight: 224, endFrame: 3 });
+            this.load.spritesheet('lasergrand3', 'assets/3Outils_laser_anim_final.png', { frameWidth: 271, frameHeight: 224, endFrame: 3 });
+            this.load.spritesheet('ballon', 'assets/ballon.png', { frameWidth: 365, frameHeight: 780, endFrame: 2 });
+            this.load.spritesheet('lasergrand4', 'assets/4Outils_laser_anim_final.png', { frameWidth: 271, frameHeight: 224, endFrame: 3 });
+            this.load.image('placeholder', 'assets/star.png');
+        }
+
+        function create() {
+
+            const gameWidth = this.cameras.main.width;
+            const gameHeight = this.cameras.main.height;
+            const centerX = gameWidth / 2;
+            const centerY = this.cameras.main.height / 2;
+            this.sceneActive = 'accueil';
+            // home c1 c2 c3 muc las coursOp finOp
+            // Pour l'affichage du trophé
+            this.mucOk = false;
+            this.muc1 = false;
+            this.muc2 = false;
+            this.muc3 = false;
+            this.muc4 = false;
+            this.muc5 = false;
+
+            this.animation = false;
+
+            // --- Object creation ---
+            // --- Object creation ---
+            // --- Object creation ---
+            // --- Object creation ---
+            // --- Object creation ---
+            // --- Object creation ---
+
+            this.accueil = this.add.image(0, 0, 'accueil').setOrigin(0, 0);
+            this.salleJeu = this.add.image(0, 0, 'sallejeu').setOrigin(0, 0).setAlpha(0);
+            this.salleJeu2 = this.add.image(0, 0, 'sallejeu2').setOrigin(0, 0).setAlpha(0);
+            this.c1 = this.add.image(0, 0, 'couloir1').setOrigin(0, 0).setAlpha(0);
+            this.c2 = this.add.image(0, 0, 'couloir2').setOrigin(0, 0).setAlpha(0);
+            this.c3 = this.add.image(0, 0, 'couloir3').setOrigin(0, 0).setAlpha(0);
+            this.c4 = this.add.image(0, 0, 'couloir4').setOrigin(0, 0).setAlpha(0);
+            this.muc = this.add.image(0, 0, 'cabinet').setOrigin(0, 0).setAlpha(0);
+            this.gto = this.add.image(0, 0, 'gto').setOrigin(0, 0).setAlpha(0);
+            this.gth = this.add.image(0, 0, 'gth').setOrigin(0, 0).setAlpha(0);
+            this.tache1 = this.add.image(0, 0, 'tache1').setOrigin(0, 0).setAlpha(0);
+            this.tache2 = this.add.image(0, 0, 'tache2').setOrigin(0, 0).setAlpha(0);
+            this.tache3 = this.add.image(0, 0, 'tache3').setOrigin(0, 0).setAlpha(0);
+            this.tache4 = this.add.image(0, 0, 'tache4').setOrigin(0, 0).setAlpha(0);
+            this.tache5 = this.add.image(0, 0, 'tache5').setOrigin(0, 0).setAlpha(0);
+            this.lunettes = this.add.image(0, 0, 'lunettes').setOrigin(0, 0).setAlpha(0);
+            this.lunettesGamme = this.add.image(0, 0, 'lunettesGamme').setOrigin(0, 0).setAlpha(0);
+            this.fg = this.add.image(0, 0, 'fg').setOrigin(0, 0).setAlpha(0);
+            this.fd = this.add.image(0, 0, 'fd').setOrigin(0, 0).setAlpha(0);
+            this.outils = this.add.image(0, 0, 'outils').setOrigin(0, 0).setAlpha(0);
+            this.troph = this.add.image(0, 0, 'trop').setOrigin(0, 0).setAlpha(0);
+            this.etincelles = this.add.sprite(90, 120, 'etincelles').setOrigin(0, 0).setVisible(false);
+            this.laserGrand = this.add.sprite(90, 300, 'lasergrand').setOrigin(0, 0).setVisible(false);
+            this.laserGrand2 = this.add.sprite(90, 300, 'lasergrand2').setOrigin(0, 0.2).setVisible(false);
+            this.laserGrand3 = this.add.sprite(90, 300, 'lasergrand3').setOrigin(0, 0.2).setVisible(false);
+            this.laserGrand4 = this.add.sprite(90, 300, 'lasergrand4').setOrigin(0, 0.2).setVisible(false);
+            this.ballon = this.add.sprite(0, 0, 'ballon').setOrigin(0, 0).setVisible(true);
+            this.halolun = this.add.sprite(0, 0, 'halolun').setOrigin(0, 0).setVisible(false);
+            this.halolas = this.add.sprite(0, 0, 'halolas').setOrigin(0, 0).setVisible(false);
+
+            this.anims.create({
+                key: 'ballon', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('ballon', {
+                    start: 0, // Index of the first frame
+                    end: 1    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 3, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+            this.anims.create({
+                key: 'wow', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('etincelles', {
+                    start: 0, // Index of the first frame
+                    end: 1    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 3, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+
+            this.anims.create({
+                key: 'laserAnim', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('lasergrand', {
+                    start: 1, // Index of the first frame
+                    end: 2    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 4, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+
+            this.anims.create({
+                key: 'laserAnim2', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('lasergrand2', {
+                    start: 1, // Index of the first frame
+                    end: 2    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 4, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+
+            this.anims.create({
+                key: 'laserAnim3', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('lasergrand3', {
+                    start: 1, // Index of the first frame
+                    end: 2    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 4, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+
+            this.anims.create({
+                key: 'laserAnim4', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('lasergrand4', {
+                    start: 1, // Index of the first frame
+                    end: 2    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 4, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+
+            this.anims.create({
+                key: 'halunAnim', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('halolun', {
+                    start: 0, // Index of the first frame
+                    end: 1    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 3, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+
+            this.anims.create({
+                key: 'halasAnim', // The unique key we defined earlier
+                // Specify which frames to use from 'etincelles'
+                frames: this.anims.generateFrameNumbers('halolas', {
+                    start: 0, // Index of the first frame
+                    end: 1    // Index of the last frame (inclusive)
+                    // Use 'frames: [0, 1, 2, 3, 4, 5, 6, 7]' for specific frames
+                }),
+                frameRate: 3, // How many frames per second the animation should run
+                repeat: -1     // -1 means loop forever, 0 means play once, 1+ means repeat N times
+            });
+
+            this.inter_porteSJ = new Phaser.Geom.Rectangle(
+                35,
+                128,
+                195,
+                442
+            );
+            this.inter_fd = new Phaser.Geom.Rectangle(
+                310,
+                330,
+                55,
+                70
+            );
+            this.inter_fg = new Phaser.Geom.Rectangle(
+                0,
+                330,
+                60,
+                70
+            );
+            this.inter_laser = new Phaser.Geom.Rectangle(
+                230,
+                330,
+                30,
+                110
+            );
+            this.inter_portecouloir = new Phaser.Geom.Rectangle(
+                90,
+                130,
+                200,
+                450
+            );
+            this.inter_lun = new Phaser.Geom.Rectangle(
+                220,
+                570,
+                100,
+                60
+            );
+            this.inter_tache1 = new Phaser.Geom.Rectangle(
+                272,
+                360,
+                33,
+                40
+            );
+            this.inter_tache2 = new Phaser.Geom.Rectangle(
+                235,
+                409,
+                50,
+                31
+            );
+            this.inter_tache3 = new Phaser.Geom.Rectangle(
+                178,
+                340,
+                30,
+                45
+            );
+            this.inter_tache4 = new Phaser.Geom.Rectangle(
+                65,
+                365,
+                40,
+                55
+            );
+            this.inter_tache5 = new Phaser.Geom.Rectangle(
+                135,
+                450,
+                35,
+                40
+            );
+            this.inter_outil1 = new Phaser.Geom.Rectangle(
+                20,
+                680,
+                80,
+                110
+            );
+            this.inter_outil2 = new Phaser.Geom.Rectangle(
+                100,
+                680,
+                100,
+                110
+            );
+            this.inter_outil3 = new Phaser.Geom.Rectangle(
+                200,
+                680,
+                60,
+                110
+            );
+            this.inter_outil4 = new Phaser.Geom.Rectangle(
+                280,
+                680,
+                60,
+                110
+            );
+            // this.wand = this.add.sprite(
+            //     this.cameras.main.width / 2,
+            //     this.cameras.main.height, // Adjust vertical position as needed
+            //     'wand' // Use the key 'wand' loaded in preload
+            // );
+            // if (this.wand) {
+            //     this.wand.scale = 0.5;
+
+            //     // Set the origin of the wand to its bottom center
+            //     // This makes rotation happen around the handle
+            //     this.wand.setOrigin(0.8, 1); // (0.5 = horizontal center, 1 = bottom)
+
+            //     // Scale the wand down if it's too big (adjust as needed)
+            //     this.wand.setScale(0.5);
+            // }
+            //this.add.text(100, 200, '[]', { fontFamily: 'Arial', fontSize: 64, color: '#000000' }).setInteractive({ draggable: true });
+
+
+            // -----------------------
+            // -----------------------
+            // -----------------------
+            // -----------------------
+            // -----------------------
+            // -----------------------
+
+            // --- Particle Effect Setup ---
+
+            // // Check if the spark texture exists before creating particles
+            // if (this.textures.exists('spark')) {
+            //     this.particles = this.add.particles('spark');
+
+            //     this.emitter = this.particles.createEmitter({
+            //         speed: { min: 50, max: 200 }, // Speed of particles
+            //         angle: { min: 0, max: 360 },  // Emit in all directions
+            //         scale: { start: 0.5, end: 0 }, // Shrink over time
+            //         lifespan: { min: 200, max: 600 }, // How long particles live (milliseconds)
+            //         quantity: 15, // Number of particles per emission burst
+            //         frequency: -1, // -1 means only emit when explode() is called
+            //         blendMode: 'ADD' // Makes particles glow nicely on dark backgrounds
+            //     });
+            //     console.warn("Particle effects en.");
+            // } else {
+            //     console.warn("Spark image not loaded. Particle effects disabled.");
+            //     // Optionally create a very basic placeholder effect if no image
+            // }
+
+            // // --- Create the Sliding Tweens ---
+            // this.nextBg = this.add.image(gameWidth, 0, 'bg2').setOrigin(0, 0).setAlpha(1);
+
+            // // 1. Tween for the CURRENT background (sliding OUT to the LEFT)
+            // this.tweens.add({
+            //     targets: this.bg,
+            //     x: -gameWidth,          // Target position: off-screen left
+            //     duration: 1600,          // Duration of the slide in milliseconds
+            //     ease: 'Power1'          // Smooth easing (e.g., 'Linear', 'Power1', 'Cubic.easeInOut')
+            //     // No onComplete needed here, we'll use the other tween's complete
+            // });
+
+            // // 2. Tween for the NEXT background (sliding IN from the RIGHT)
+            // this.tweens.add({
+            //     targets: this.nextBg,
+            //     x: 0,                   // Target position: on-screen (0,0)
+            //     duration: 1600,          // Same duration as the outgoing slide
+            //     ease: 'Power1',         // Same easing
+            //     onComplete: () => {     // Function to run *after* this tween finishes
+            //         console.log("Slide transition complete.");
+            //     }
+            // });
+
+            // --- init ---
+            this.bg = this.accueil;
+            this.transitionD = transitionD;
+            this.transitionG = transitionG;
+            this.laserchoisi = this.laserGrand;
+            this.animLaser = 'laserAnim';
+            this.ballon.play('ballon');
+            // --- Input Handling ---
+
+            // Listen for pointer (mouse click or touch) down events
+            this.input.on('pointerdown', (pointer) => {
+                console.log('sceneActive:', this.sceneActive);
+                console.log(this.animation);
+                console.log(this.bg);
+                if (!this.animation) {
+                    switch (this.sceneActive) {
+                        case 'accueil':
+                            this.bg.setAlpha(0);
+                            this.bg = this.salleJeu;
+                            this.bg.setAlpha(1);
+                            this.fg.setAlpha(1);
+                            this.ballon.stop();
+                            this.ballon.setVisible(false);
+                            this.sceneActive = 'home';
+                            break;
+                        case 'home':
+                            if (this.inter_fg.contains(pointer.x, pointer.y)) {
+                                this.transitionG(this.salleJeu2);
+                                this.fg.setAlpha(0);
+                                this.fd.setAlpha(1);
+                                this.sceneActive = 'home2';
+                                if (this.mucOk)
+                                    this.tweens.add({
+                                        targets: this.troph,
+                                        x: gameWidth,                   // Target position: on-screen (0,0)
+                                        duration: 800,          // Same duration as the outgoing slide
+                                        ease: 'Linear',         // Same easing
+                                        onComplete: () => {     // Function to run *after* this tween finishes
+                                            this.troph.setAlpha(0);
+                                            this.troph.setPosition(0, 0);
+                                        }
+                                    });
+                            }
+                            break;
+                        case 'home2':
+                            if (this.inter_fd.contains(pointer.x, pointer.y)) {
+                                this.transitionD(this.salleJeu);
+                                this.fd.setAlpha(0);
+                                this.fg.setAlpha(1);
+                                this.sceneActive = 'home';
+                                this.troph.setPosition(gameWidth, 0);
+                                this.troph.setAlpha(1);
+                                if (this.mucOk)
+                                    this.tweens.add({
+                                        targets: this.troph,
+                                        x: 0,                   // Target position: on-screen (0,0)
+                                        duration: 800,          // Same duration as the outgoing slide
+                                        ease: 'Linear',         // Same easing
+                                        onComplete: () => {     // Function to run *after* this tween finishes
+
+                                        }
+                                    });
+                            } else if (this.inter_porteSJ.contains(pointer.x, pointer.y)) {
+                                this.bg.setAlpha(0);
+                                this.bg = this.c1;
+                                this.bg.setAlpha(1);
+                                this.fd.setAlpha(1);
+                                this.sceneActive = 'c1';
+                            }
+                            break;
+                        case 'c1':
+                            if (this.inter_portecouloir.contains(pointer.x, pointer.y)) {
+                                this.bg.setAlpha(0);
+                                this.bg = this.muc;
+                                this.bg.setAlpha(1);
+                                this.fd.setAlpha(0);
+                                this.fg.setAlpha(0);
+                                this.halolun.setVisible(true);
+                                this.halolun.play('halunAnim');
+                                this.sceneActive = 'muc';
+                            } else if (this.inter_fd.contains(pointer.x, pointer.y)) {
+                                this.transitionD(this.c2);
+                                // this.bg.setAlpha(0);
+                                // this.bg = this.c2;
+                                // this.bg.setAlpha(1);
+                                this.fd.setAlpha(1);
+                                this.fg.setAlpha(1);
+                                this.sceneActive = 'c2';
+                            }
+                            break;
+                        case 'c2':
+                            if (this.inter_fd.contains(pointer.x, pointer.y)) {
+                                this.transitionD(this.c3);
+                                // this.bg.setAlpha(0);
+                                // this.bg = this.c3;
+                                // this.bg.setAlpha(1);
+                                this.fd.setAlpha(1);
+                                this.fg.setAlpha(1);
+                                this.sceneActive = 'c3';
+                            } else if (this.inter_fg.contains(pointer.x, pointer.y)) {
+                                this.transitionG(this.c1);
+                                // this.bg.setAlpha(0);
+                                // this.bg = this.c1;
+                                // this.bg.setAlpha(1);
+                                this.fd.setAlpha(1);
+                                this.fg.setAlpha(0);
+                                this.sceneActive = 'c1';
+                            }
+                            break;
+                        case 'c3':
+                            if (this.inter_fd.contains(pointer.x, pointer.y)) {
+                                this.transitionD(this.c4);
+                                // this.bg.setAlpha(0);
+                                // this.bg = this.c4;
+                                // this.bg.setAlpha(1);
+                                this.fd.setAlpha(0);
+                                this.fg.setAlpha(1);
+                                this.sceneActive = 'c4';
+                            } else if (this.inter_fg.contains(pointer.x, pointer.y)) {
+                                this.transitionG(this.c2);
+                                // this.bg.setAlpha(0);
+                                // this.bg = this.c2;
+                                // this.bg.setAlpha(1);
+                                this.fd.setAlpha(1);
+                                this.fg.setAlpha(1);
+                                this.sceneActive = 'c2';
+                            }
+                            break;
+                        case 'c4':
+                            if (this.inter_fg.contains(pointer.x, pointer.y)) {
+                                this.transitionG(this.c3);
+                                // this.bg.setAlpha(0);
+                                // this.bg = this.c3;
+                                // this.bg.setAlpha(1);
+                                this.fd.setAlpha(1);
+                                this.fg.setAlpha(1);
+                                this.sceneActive = 'c3';
+                            }
+                            break;
+                        case 'muc':
+                            if (this.inter_lun.contains(pointer.x, pointer.y)) {
+                                this.bg.setAlpha(0);
+                                this.bg = this.lunettes;
+                                this.bg.setAlpha(1);
+                                this.sceneActive = 'las';
+                                this.halolun.setVisible(false);
+                                this.halolun.stop();
+                                this.halolas.setVisible(true);
+                                this.halolas.play('halasAnim');
+                            }
+                            break;
+                        case 'las':
+                            if (this.inter_laser.contains(pointer.x, pointer.y)) {
+                                this.bg.setAlpha(0);
+                                this.bg = this.gto;
+                                this.bg.setAlpha(1);
+                                this.tache1.setAlpha(1);
+                                this.tache2.setAlpha(1);
+                                this.tache3.setAlpha(1);
+                                this.tache4.setAlpha(1);
+                                this.tache5.setAlpha(1);
+                                this.outils.setAlpha(1);
+                                this.laserchoisi.setPosition(90, 300);
+                                this.laserchoisi.setVisible(true);
+                                this.halolas.setVisible(false);
+                                this.halolas.stop();
+                                this.animation = true;
+                                this.muc1 = true;
+                                this.muc2 = true;
+                                this.muc3 = true;
+                                this.muc4 = true;
+                                this.muc5 = true;
+                                this.sceneActive = 'coursOp';
+                            }
+                            break;
+                        case 'coursOp':
+                            if (this.inter_outil1.contains(pointer.x, pointer.y)) {
+                                this.laserchoisi.stop();
+                                this.laserchoisi.setVisible(false);
+                                this.laserchoisi = this.laserGrand;
+                                this.laserchoisi.setVisible(true);
+                                this.animLaser = 'laserAnim';
+                            } else if (this.inter_outil2.contains(pointer.x, pointer.y)) {
+                                this.laserchoisi.stop();
+                                this.laserchoisi.setVisible(false);
+                                this.laserchoisi = this.laserGrand2;
+                                this.laserchoisi.setVisible(true);
+                                this.animLaser = 'laserAnim2';
+                            } else if (this.inter_outil3.contains(pointer.x, pointer.y)) {
+                                this.laserchoisi.stop();
+                                this.laserchoisi.setVisible(false);
+                                this.laserchoisi = this.laserGrand3;
+                                this.laserchoisi.setVisible(true);
+                                this.animLaser = 'laserAnim3';
+
+                            } else if (this.inter_outil4.contains(pointer.x, pointer.y)) {
+                                this.laserchoisi.stop();
+                                this.laserchoisi.setVisible(false);
+                                this.laserchoisi = this.laserGrand4;
+                                this.laserchoisi.setVisible(true);
+                                this.animLaser = 'laserAnim4';
+                            }
+                            this.laserchoisi.play(this.animLaser);
+                            break;
+                        case 'finOp':
+                            break;
+                    }
+                }
+
+                this.input.on('pointerup', (pointer) => {
+                    if (this.sceneActive == 'coursOp') {
+                        this.animation = false;
+                        this.laserchoisi.stop();
+                        this.laserchoisi.setFrame(0);
+                    }
+                })
+
+                //this.bg.setTexture('bg2');
+
+                // Trigger the particle effect at the click location
+                // if (this.emitter) {
+                //     this.emitter.explode(15, pointer.x, pointer.y); // 15 particles at pointer coords
+                // }
+                // this.tweens.add({
+                //     targets: this.nextBg,
+                //     alpha: 1, // Fade it in (from 0 to 1)
+                //     duration: 1000, // Transition duration in milliseconds (1 second)
+                //     ease: 'Linear', // Or 'Power1', 'Power2', etc.
+                //     onComplete: () => { // Function to run after the fade-in completes
+                //         console.log("Transition complete.");
+
+                //         // Allow new transitions
+                //         this.isTransitioning = false;
+                //     }
+                // });
+
+                //this.wand.destroy(true);
+
+                // Option 2: Smooth Movement (Tweening)
+                // // Stop any existing tweens on the wand to prevent conflicts
+                // this.tweens.killTweensOf(this.wand);
+
+                // // Create a new tween to move the wand
+                // this.tweens.add({
+                //     targets: this.wand, // The game object to tween
+                //     x: pointer.x,            // Target x position
+                //     y: pointer.y,            // Target y position
+                //     duration: 300,           // Time in milliseconds for the movement
+                //     ease: 'Power2'           // Easing function for smooth acceleration/deceleration
+                //     // Other options: 'Linear', 'Sine.easeInOut', 'Bounce.easeOut' etc.
+                //     // You could also add rotation here if desired:
+                //     // angle: Phaser.Math.RadToDeg(Phaser.Math.Angle.Between(this.magicWand.x, this.magicWand.y, pointer.x, pointer.y)) + 90 // Point towards target (+90 if wand points 'up')
+
+                // })
+                // Optional: Add other click actions here (e.g., play a sound)
+                // this.sound.play('magicSound'); // If you loaded a sound
+            });
+        }
+
+        function transitionG(nextbg) {
+
+            const gameWidth = this.cameras.main.width;
+            this.animation = true;
+
+            nextbg.setPosition(-gameWidth, 0);
+            nextbg.setAlpha(1);
+
+            // // 1. Tween for the CURRENT background (sliding OUT to the LEFT)
+            this.tweens.add({
+                targets: this.bg,
+                x: gameWidth,          // Target position: off-screen left
+                duration: 800,          // Duration of the slide in milliseconds
+                ease: 'Linear'          // Smooth easing (e.g., 'Linear', 'Power1', 'Cubic.easeInOut')
+                // No onComplete needed here, we'll use the other tween's complete
+            });
+
+            // // 2. Tween for the NEXT background (sliding IN from the RIGHT)
+            this.tweens.add({
+                targets: nextbg,
+                x: 0,                   // Target position: on-screen (0,0)
+                duration: 800,          // Same duration as the outgoing slide
+                ease: 'Linear',         // Same easing
+                onComplete: () => {     // Function to run *after* this tween finishes
+                    this.bg.setAlpha(0);
+                    this.bg.setPosition(0, 0);
+                    this.bg = nextbg;
+                    this.animation = false;
+                }
+            })
+        }
+        function transitionD(nextbg) {
+
+            const gameWidth = this.cameras.main.width;
+            this.animation = true;
+
+            nextbg.setPosition(gameWidth, 0);
+            nextbg.setAlpha(1);
+
+            // // 1. Tween for the CURRENT background (sliding OUT to the LEFT)
+            this.tweens.add({
+                targets: this.bg,
+                x: -gameWidth,          // Target position: off-screen left
+                duration: 800,          // Duration of the slide in milliseconds
+                ease: 'Linear'          // Smooth easing (e.g., 'Linear', 'Power1', 'Cubic.easeInOut')
+                // No onComplete needed here, we'll use the other tween's complete
+            });
+
+            // // 2. Tween for the NEXT background (sliding IN from the RIGHT)
+            this.tweens.add({
+                targets: nextbg,
+                x: 0,                   // Target position: on-screen (0,0)
+                duration: 800,          // Same duration as the outgoing slide
+                ease: 'Linear',         // Same easing
+                onComplete: () => {     // Function to run *after* this tween finishes
+                    this.bg.setAlpha(0);
+                    this.bg.setPosition(0, 0);
+                    this.bg = nextbg;
+                    this.animation = false;
+                }
+            });
+        }
+
+        // Continuously update wand rotation in the update loop based on pointer position
+        function update(time, delta) {
+
+            // Get the active pointer (mouse or touch)
+            const pointer = this.input.activePointer;
+            // --- Wand Aiming ---
+            if (!this.animation) {
+                if (this.sceneActive == 'coursOp') {
+                    if (pointer.isDown) {
+                        console.log('MUCSOMME', this.muc1 + this.muc2 + this.muc3 + this.muc4 + this.muc5);
+                        this.laserchoisi.setPosition(pointer.x - 30, pointer.y - 130);
+                        if (this.muc1 && this.inter_tache1.contains(pointer.x, pointer.y)) {
+                            this.tache1.setAlpha(0);
+                            this.muc1 = false;
+                        } else if (this.muc2 && this.inter_tache2.contains(pointer.x, pointer.y)) {
+                            this.tache2.setAlpha(0);
+                            this.muc2 = false;
+                        } else if (this.muc3 && this.inter_tache3.contains(pointer.x, pointer.y)) {
+                            this.tache3.setAlpha(0);
+                            this.muc3 = false;
+                        } else if (this.muc4 && this.inter_tache4.contains(pointer.x, pointer.y)) {
+                            this.tache4.setAlpha(0);
+                            this.muc4 = false;
+                        } else if (this.muc5 && this.inter_tache5.contains(pointer.x, pointer.y)) {
+                            this.tache5.setAlpha(0);
+                            this.muc5 = false;
+                        }
+                    }
+                    if (this.muc1 + this.muc2 + this.muc3 + this.muc4 + this.muc5 == 0) {
+                        this.bg.setAlpha(0);
+                        this.bg = this.gth;
+                        this.bg.setAlpha(1);
+                        this.outils.setAlpha(0);
+                        this.lunettes.setAlpha(0);
+                        this.outils.setAlpha(0);
+                        this.laserchoisi.stop();
+                        this.laserchoisi.setFrame(0);
+                        this.laserchoisi.setVisible(false);
+                        this.etincelles.setVisible(true);
+                        this.etincelles.play('wow');
+                        this.sceneActive = 'finOp';
+                        this.animation = true;
+                        setTimeout(() => {
+                            this.animation = false;
+                        }, "1500");
+                    }
+                } else if (this.sceneActive == 'finOp') {
+                    this.etincelles.stop();
+                    this.etincelles.setVisible(false);
+                    this.mucOk = true;
+                    this.troph.setAlpha(1);
+                    this.fg.setAlpha(1);
+                    this.bg.setAlpha(0);
+                    this.bg = this.salleJeu;
+                    this.bg.setAlpha(1);
+                    this.sceneActive = 'home';
+                }
+            }
+
+            // Calculate the angle between the wand's origin and the pointer
+            // const angle = Phaser.Math.Angle.Between(
+            //     //this.wand.x, this.wand.y, // Wand's origin point
+            //     pointer.x, pointer.y      // Pointer's current position
+            // );
+
+            // Convert angle to degrees and adjust
+            // Phaser angles are in radians, 0 pointing right.
+            // Sprites angle is in degrees, 0 pointing right.
+            // Since our wand image points UPWARDS, and origin is bottom-center,
+            // we add 90 degrees (or PI/2 radians) to align it.
+            //this.wand.angle = Phaser.Math.RadToDeg(angle) + 120;
+        }
+
+    </script>
+
+</body>
+
+</html>
