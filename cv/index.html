@@ -45,33 +45,27 @@
 </head>
 <body class="py-6 print:py-0">
 
-    <!-- Print Button Bar -->
-    <div class="max-w-[210mm] mx-auto mb-4 flex justify-between items-center no-print px-2">
-        <span class="text-sm text-gray-600 font-medium">Aperçu CV 1 Page - Gabriel WANTZ</span>
-        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow transition flex items-center gap-2">
-            <i class="fa-solid fa-print"></i> Télécharger en PDF / Imprimer
-        </button>
-    </div>
-
     <!-- Main CV Layout -->
     <div class="cv-container p-6 flex flex-col justify-between">
         
         <!-- Header -->
-        <header class="border-b pb-4 mb-4 border-gray-200">
+        <header class="bg-[url(./x)] bg-cover bg-center border-b pb-4 mb-4 border-gray-200">
             <div class="flex justify-between items-start">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight text-slate-900 uppercase">Gabriel WANTZ</h1>
                     <p class="text-blue-600 font-semibold text-base uppercase tracking-wider mt-0.5">Analyste Développeur</p>
                 </div>
+                <img alt class="h-32 w-32 object-contain" src="./CVphoto2_circular.png" />
                 <div class="text-xs text-gray-600 space-y-1 text-right">
                     <div><i class="fa-solid fa-envelope text-blue-500 w-4"></i> gabriel.wantz@gmail.com</div>
+                    <div><i class="fa-solid fa-calendar text-blue-500 w-4"></i> 27 ans</div>
                     <div><i class="fa-solid fa-phone text-blue-500 w-4"></i> 06 51 03 80 69</div>
                     <div><i class="fa-solid fa-location-dot text-blue-500 w-4"></i> Strasbourg (67) • Permis B</div>
                 </div>
             </div>
             
             <p class="mt-3 text-xs text-gray-600 leading-relaxed bg-slate-50 p-2.5 rounded-md border border-slate-100">
-                <span class="font-semibold text-slate-800">Ingénieur informatique diplômé de l'INSA Lyon</span>, spécialisé en développement full-stack et architectures orientées objet (.NET, C#, C++). Expérience confirmée en grands comptes (Euro-Information / Crédit Mutuel) et contextes agiles internationaux. Profil multilingue adapté au marché alsacien et transfrontalier.
+                <span class="font-semibold text-slate-800">Ingénieur informatique diplômé de l'INSA Lyon</span>, je suis spécialisé en développement full-stack et architectures orientées objet (.NET, C#, C++). Les expériences en équipes pluridisciplinaires et internationales m'ont appris à communiquer efficacement. Mes bases techniques solides et la diversité dans mon parcours me permettent d'être force de proposition et contribuer activement à la réussite de vos projets. Je souhaite m'investir dans le développement, la pérennisation et l'optimisation de vos produits face aux enjeux technologiques actuels.
             </p>
         </header>
 
@@ -90,12 +84,16 @@
                         <h3 class="text-xs font-bold text-slate-900">Analyste Développeur <span class="text-blue-600">@ Euro-Information</span></h3>
                         <span class="text-[10px] text-gray-500 font-medium">03/2025 - 06/2025</span>
                     </div>
-                    <p class="text-[10px] text-gray-500 italic mb-1">Objectware (14 personnes) • Filiale Crédit Mutuel</p>
+                    <p class="text-[10px] text-gray-500 italic mb-1">En mission avec Objectware dans une filiale du Crédit Mutuel (équipe de 14 personnes)</p>
                     <ul class="text-[11px] text-gray-700 list-disc list-inside space-y-0.5 leading-tight">
-                        <li>Migration de pages web stratégiques vers un nouveau framework .NET/C#.</li>
-                        <li>Spécifications, tests manuels, maquettage et intégration d'API REST.</li>
-                        <li><strong class="text-blue-700">Impact :</strong> Temps de chargement optimisé de 2s à 0,1s par page.</li>
-                        <li><span class="text-gray-500 italic">Acquis :</span> Performance web avancée & environnement bancaire critique.</li>
+                        <li>Migration de 8 pages web vers un nouveau framework interne .NET/C#/XAML.</li>
+                        <li>Analyse du code hérité.</li>
+                        <li>Rédaction des spécifications fonctionnelles.</li>
+                        <li>Maquettage avec un outil interne.</li>
+                        <li>Analyse critique avec l'équipe MOA.</li>
+                        <li>Intégration de deux API au nouveau framework.</li>
+                        <li>Rédaction du cahier de tests manuels.</li>
+                        <li>Temps de chargement optimisé de 2s à moins de 0,1s pour une page avec des appels API synchrones.</li>
                     </ul>
                 </div>
 
@@ -105,23 +103,25 @@
                         <h3 class="text-xs font-bold text-slate-900">Assistant Architecte Logiciel <span class="text-blue-600">@ Mantu</span></h3>
                         <span class="text-[10px] text-gray-500 font-medium">09/2020 - 03/2021</span>
                     </div>
-                    <p class="text-[10px] text-gray-500 italic mb-1">Projet international (6 personnes) avec l'équipe du Vietnam</p>
+                    <p class="text-[10px] text-gray-500 italic mb-1">Stage de fin d'études anticipé sur un projet international (équipe de 6 personnes)</p>
                     <ul class="text-[11px] text-gray-700 list-disc list-inside space-y-0.5 leading-tight">
                         <li>Mise en place de pipelines CI/CD DevOps (Azure, Kubernetes) en production.</li>
-                        <li>Rédaction du backlog frontend et création des tests d'intégration.</li>
-                        <li><span class="text-gray-500 italic">Acquis :</span> Maîtrise DevOps & gestion de projet agile à l'international.</li>
+                        <li>Rédaction du backlog frontend et participation aux développements.</li>
+                        <li>Création de tests E2E continus sur 4 parcours utilisateurs (Selenium).</li>
+                        <li>Organisation de sprint review (agile) avec le collaborateur anglophone au Vietnam responsable de l'intégration mobile Android/IOS.</li>
                     </ul>
                 </div>
 
                 <!-- Exp 3 -->
                 <div>
                     <div class="flex justify-between items-baseline">
-                        <h3 class="text-xs font-bold text-slate-900">Intégrateur Web & Audio <span class="text-blue-600">@ Agence Conseil</span></h3>
+                        <h3 class="text-xs font-bold text-slate-900">Intégrateur Web & Audio <span class="text-blue-600">@ AW-Innovate</span></h3>
                         <span class="text-[10px] text-gray-500 font-medium">06/2020 - 08/2020</span>
                     </div>
+                    <p class="text-[10px] text-gray-500 italic mb-1">Contrat de stage en agence de conseil locale (travail en binôme)</p>
                     <ul class="text-[11px] text-gray-700 list-disc list-inside space-y-0.5 leading-tight mt-1">
-                        <li>Développement de plugins et intégration de visioconférence (C++, JS, OBS).</li>
-                        <li><span class="text-gray-500 italic">Acquis :</span> Traitement et flux multimédias en temps réel.</li>
+                        <li>Intégration de l'outil de visioconférence Jitsi à l'outil de régie virtuelle OBS.</li>
+                        <li>Développement d'un plugin pour faciliter l'utilisation (C++, JS).</li>
                     </ul>
                 </div>
 
@@ -131,9 +131,12 @@
                         <h3 class="text-xs font-bold text-slate-900">Développeur Frontend <span class="text-blue-600">@ Vattenfall</span></h3>
                         <span class="text-[10px] text-gray-500 font-medium">08/2018 - 09/2018</span>
                     </div>
+                    <p class="text-[10px] text-gray-500 italic mb-1">Travail temporaire dans le secteur de l'energie (équipe de 6 personnes)</p>
                     <ul class="text-[11px] text-gray-700 list-disc list-inside space-y-0.5 leading-tight mt-1">
-                        <li>Intégration CRM (SuiteCRM) & refonte d'architecture SQL. Animation Daily Scrum.</li>
-                        <li><span class="text-gray-500 italic">Acquis :</span> Rituels agiles Scrum & modélisation de données.</li>
+                        <li>Analyse de besoin et participation à la refonte d'architecture SQL.</li>
+                        <li>Intégration de 3 pages de la CRM à la base de données.</li>
+                        <li>Écriture de deux requêtes SQL pour la récupération des données à afficher.</li>
+                        <li>Animation de réunions daily scrum en méthodologie de travail agile.</li>
                     </ul>
                 </div>
 
@@ -143,10 +146,26 @@
                         <h3 class="text-xs font-bold text-slate-900">Développeur Backend <span class="text-blue-600">@ Actweb</span></h3>
                         <span class="text-[10px] text-gray-500 font-medium">06/2017 - 08/2017</span>
                     </div>
+                    <p class="text-[10px] text-gray-500 italic mb-1">Contrat de stage en agence de conseil locale (travail en binôme)</p>
                     <ul class="text-[11px] text-gray-700 list-disc list-inside space-y-0.5 leading-tight mt-1">
-                        <li>Développement d'applications vocales R&D (Google Home, Alexa, Node.js, AWS).</li>
-                        <li><span class="text-gray-500 italic">Acquis :</span> Prototypage rapide & intégration de services Cloud.</li>
+                        <li>Développement de six applications POC pour deux assistants vocaux (Google Home, Alexa, Node.js, AWS).</li>
+                        <li>Rédaction du rapport de recherche et réalisation de vidéos explicatives.</li>
                     </ul>
+                </div>
+
+                <!-- Key Project -->
+                <div>
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800 border-b-2 border-blue-600 pb-1 mb-1.5 flex items-center gap-2">
+                        <i class="fa-solid fa-flask text-blue-600"></i> Projet R&D
+                    </h2>
+                    <div class="text-[10.5px] text-gray-700 leading-tight">
+                        <span class="font-bold text-slate-900">Modélisation 3D et Vision (INSA) :</span>
+                        <p class="mt-0.5 text-gray-600">Capture non intrusive de mouvements d'animaux par DeepLearning (DeepLabCut, Python, Unreal Engine, C++).</p>
+                    </div>
+                    <div class="text-[10.5px] text-gray-700 leading-tight">
+                        <span class="font-bold text-slate-900">Data (Laboratoire LIRIS) :</span>
+                        <p class="mt-0.5 text-gray-600">Réalisation d'une tablette pour détecter les premiers signes de dyslexie chez les enfants en bas âge (C#)</p>
+                    </div>
                 </div>
             </section>
 
@@ -160,21 +179,53 @@
                     </h2>
                     <div class="space-y-1.5 text-[11px]">
                         <div>
-                            <span class="font-bold text-slate-800">Langages :</span>
-                            <p class="text-gray-600">C#, C++, C, Java, Python, JavaScript, SQL, Prolog, XML</p>
+                            <span class="font-bold text-slate-800">Systèmes & Matériel :</span>
+                            <p class="text-gray-600">Linux/Unix, Windows, ROS, Raspberry Pi, Arduino</p>
                         </div>
                         <div>
-                            <span class="font-bold text-slate-800">Frameworks & Web :</span>
-                            <p class="text-gray-600">.NET, Vue.js, Express, Node.js, PyTorch</p>
+                            <span class="font-bold text-slate-800">Langages de programmation :</span>
+                            <p class="text-gray-600">C#, C++, C, COBOL, Java, Python, JavaScript, SQL, Prolog, XML, HTML</p>
                         </div>
                         <div>
-                            <span class="font-bold text-slate-800">Bases de données & Cloud :</span>
-                            <p class="text-gray-600">MS SQL Server, PostgreSQL, MongoDB, Azure, AWS, GCP</p>
+                            <span class="font-bold text-slate-800">Frameworks :</span>
+                            <p class="text-gray-600">.NET, Vue.js, Express, Node.js</p>
                         </div>
                         <div>
-                            <span class="font-bold text-slate-800">Outils & DevOps :</span>
-                            <p class="text-gray-600">Docker, Kubernetes, Git, Visual Studio, Linux, Agile (Scrum)</p>
+                            <span class="font-bold text-slate-800">Bases de données :</span>
+                            <p class="text-gray-600">MS SQL Server, PostgreSQL, MongoDB</p>
                         </div>
+                        <div>
+                            <span class="font-bold text-slate-800">Cloud :</span>
+                            <p class="text-gray-600">Azure, AWS, GCP, Heroku</p>
+                        </div>
+                        <!-- <div>
+                            <span class="font-bold text-slate-800">Gestion de sources :</span>
+                            <p class="text-gray-600">Git</p>
+                        </div> -->
+                        <div>
+                            <span class="font-bold text-slate-800">IDE :</span>
+                            <p class="text-gray-600">Visual Studio Code, Visual Studio, JetBrains IntelliJ, Eclipse, NetBeans</p>
+                        </div>
+                        <!-- <div>
+                            <span class="font-bold text-slate-800">Réseau :</span>
+                            <p class="text-gray-600">Wireshark</p>
+                        </div> -->
+                        <!-- <div>
+                            <span class="font-bold text-slate-800">Ingénierie :</span>
+                            <p class="text-gray-600">SolidWorks, MATLAB simulink</p>
+                        </div> -->
+                        <div>
+                            <span class="font-bold text-slate-800">Gestion de projet :</span>
+                            <p class="text-gray-600">Trello, MS Planner, Google sheet, Suite Microsoft, Suite LibreOffice</p>
+                        </div>
+                        <!-- <div>
+                            <span class="font-bold text-slate-800">Data :</span>
+                            <p class="text-gray-600">Knime</p>
+                        </div> -->
+                        <!-- <div>
+                            <span class="font-bold text-slate-800">Multimédia :</span>
+                            <p class="text-gray-600">Unity, Unreal Engine, OBS Studio, Windows Movie Maker</p>
+                        </div> -->
                     </div>
                 </div>
 
@@ -185,19 +236,19 @@
                     </h2>
                     <div class="space-y-2 text-[11px]">
                         <div>
-                            <div class="font-bold text-slate-900">Diplôme d'Ingénieur Informatique</div>
-                            <div class="text-blue-600 font-medium">INSA Lyon</div>
-                            <div class="text-gray-400 text-[10px]">2018 - 2023</div>
+                            <div class="font-bold text-slate-900">Certificat d'École de Japonais</div>
+                            <div class="text-gray-600">Human Academy, Osaka, Japon</div>
+                            <div class="text-gray-400 text-[10px]">juillet 2025 - juin 2026</div>
                         </div>
                         <div>
-                            <div class="font-bold text-slate-900">Certificat d'École de Japonais</div>
-                            <div class="text-gray-600">Human Academy</div>
-                            <div class="text-gray-400 text-[10px]">2022 - 2023</div>
+                            <div class="font-bold text-slate-900">Diplôme d'Ingénieur Informatique</div>
+                            <div class="text-blue-600 font-medium">INSA Lyon</div>
+                            <div class="text-gray-400 text-[10px]">sept. 2018 - juillet 2023 <span class="italic">(redoublement à la suite d'un échange scolaire annulé dû à la COVID)</span></div>
                         </div>
                         <div>
                             <div class="font-bold text-slate-900">Classes Préparatoires</div>
-                            <div class="text-gray-600">INSA Lyon (Asiatique) / INSA Strasbourg</div>
-                            <div class="text-gray-400 text-[10px]">2016 - 2018</div>
+                            <div class="text-gray-600">INSA Strasbourg / INSA Lyon (filière asiatique)</div>
+                            <div class="text-gray-400 text-[10px]">sept. 2016 - juillet 2018</div>
                         </div>
                     </div>
                 </div>
@@ -209,20 +260,12 @@
                     </h2>
                     <div class="grid grid-cols-2 gap-1.5 text-[11px]">
                         <div><span class="font-semibold text-slate-800">Anglais :</span> <span class="text-blue-600 font-bold">TOEIC 940</span></div>
-                        <div><span class="font-semibold text-slate-800">Allemand :</span> Courant</div>
-                        <div><span class="font-semibold text-slate-800">Japonais :</span> Courant</div>
-                        <div><span class="font-semibold text-slate-800">Chinois :</span> Intermédiaire</div>
+                        <div><span class="font-semibold text-slate-800">Allemand :</span> Intermédiaire</div>
+                        <div></div>
                     </div>
-                </div>
-
-                <!-- Key Project -->
-                <div>
-                    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-800 border-b-2 border-blue-600 pb-1 mb-1.5 flex items-center gap-2">
-                        <i class="fa-solid fa-flask text-blue-600"></i> Projet R&D
-                    </h2>
-                    <div class="text-[10.5px] text-gray-700 leading-tight">
-                        <span class="font-bold text-slate-900">Modélisation 3D & Vision (INSA) :</span>
-                        <p class="mt-0.5 text-gray-600">Reconstruction 3D d'animaux via Deep Learning (DeepLabCut, Python, Unreal Engine, C++).</p>
+                    <div class="grid gap-1.5 text-[11px]">
+                        <div><span class="font-semibold text-slate-800">Japonais :</span> Courant, préparation du JLPT N2</div>
+                        <div><span class="font-semibold text-slate-800">Chinois :</span> Intermédiaire, en apprentissage actif</div>
                     </div>
                 </div>
 
